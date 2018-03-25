@@ -1,4 +1,4 @@
-package cn.ahyd.shop.model;
+package cn.anyd.shop.dao;
 
 public class Maintest {
 	public static void main(String[] args){

@@ -1,5 +1,6 @@
-package cn.ahyd.shop.model;
+package cn.anyd.shop.dao;
 
+import cn.ahyd.shop.model.Product;
 import cn.anyd.shop.dao.ProductDaolmpl;
 
 public class update {

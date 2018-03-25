@@ -1,14 +1,14 @@
 package cn.anyd.shop.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 import cn.ahyd.shop.model.Product;
-import cn.anyd.shop.util.JdbcUtil;
+
 
 public class ProductDaolmpl extends BaseDaoImpl<Product> {
 	
@@ -30,6 +30,14 @@ public class ProductDaolmpl extends BaseDaoImpl<Product> {
 		String sql = "select * from product where name like ?";
 		return super.queryByBame(sql, new Object[]{"%"+name+"%"});
 	}
+	
+	public ArrayList<Product> queryByBame(String name, int page, int size){
+		
+		String sql = "select * from product where name like ? limit ?,?";
+		return super.queryByBame(sql, new Object[]{"%" + name + "%", (page - 1)*size, size});
+	}	
+	
+	
 	
 	public Product getById(int id) {
 		

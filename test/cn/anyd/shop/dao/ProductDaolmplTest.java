@@ -65,5 +65,13 @@ public class ProductDaolmplTest {
 			System.out.println(temp);
 		}
 	}
+	
+	@Test
+	public void testQueryName1() {
+		ArrayList<Product> proList = daoImpl.queryByBame("", 2, 4);
+		for(Product temp:proList){
+			System.out.println(temp);
+		}
+	}
 
 }
