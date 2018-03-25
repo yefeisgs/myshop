@@ -6,15 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.anyd.shop.util.JdbcUtil;
+import cn.yd.shop.dao.RowMapper;
 
 
 public abstract class BaseDaoImpl<T> {
 
-	protected abstract T getRow(ResultSet rs) throws SQLException;
+	//protected abstract T getRow(ResultSet rs) throws SQLException;
 
-	public T getById(String sql, Object id) {
+	public T getById(String sql, Object id, RowMapper<T> mapper) {
 
 		T t = null;
 
@@ -32,7 +34,7 @@ public abstract class BaseDaoImpl<T> {
 			
 			
 			if (rs.next()) {
-				t = this.getRow(rs);
+				t = mapper.mapRow(rs);
 				
 			}
 			return t;
@@ -45,9 +47,9 @@ public abstract class BaseDaoImpl<T> {
 
 	}
 
-	protected ArrayList<T> queryByBame(String sql, Object[] param) {
+	protected List<T> queryByBame(String sql, Object[] param, RowMapper<T> mapper) {
 
-		ArrayList<T> tList = new ArrayList<T>();
+		List<T> tList = new ArrayList<T>();
 		
 
 		Connection conn = null;
@@ -58,6 +60,7 @@ public abstract class BaseDaoImpl<T> {
 			conn = JdbcUtil.getConnection();
 			pre = conn.prepareStatement(sql);
 			
+			
 			for (int i = 0; i < param.length; i++){
 				
 				pre.setObject(i+1, param[i]);
@@ -66,7 +69,7 @@ public abstract class BaseDaoImpl<T> {
 			rs = pre.executeQuery();
 			
 			while (rs.next()) {
-				tList.add(this.getRow(rs));
+				tList.add(mapper.mapRow(rs));
 				
 			}
 			return tList;
@@ -108,5 +111,8 @@ public abstract class BaseDaoImpl<T> {
 		}
 
 	}
+
+
+
 
 }

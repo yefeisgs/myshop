@@ -4,15 +4,15 @@ package cn.anyd.shop.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
+import java.util.List;
 
 import cn.ahyd.shop.model.Product;
+import cn.yd.shop.dao.RowMapper;
 
 
 public class ProductDaolmpl extends BaseDaoImpl<Product> {
 	
-	@Override
+/*	@Override
 	protected Product getRow(ResultSet rs) throws SQLException {
 		
 		Product product = new Product();
@@ -22,30 +22,62 @@ public class ProductDaolmpl extends BaseDaoImpl<Product> {
 		product.setRemark(rs.getString("remark"));
 		return product;
 		
-	}
+	}*/
 	
 	
-	public ArrayList<Product> queryByBame(String name){
+	public List<Product> queryByBame(String name){
 		
 		String sql = "select * from product where name like ?";
-		return super.queryByBame(sql, new Object[]{"%"+name+"%"});
+		return super.queryByBame(sql, new Object[]{"%" + name + "%"},new RowMapper<Product>() {
+	
+			@Override
+			public Product mapRow(ResultSet rs) throws SQLException {
+				Product product = new Product();
+				product.setId(rs.getInt("id"));
+				product.setName(rs.getString("name"));
+				product.setPrice(rs.getDouble("price"));
+				product.setRemark(rs.getString("remark"));
+				return product;
+			}
+		});
+		
+		
 	}
 	
-	public ArrayList<Product> queryByBame(String name, int page, int size){
+	public List<Product> queryByBame(String name, int page, int size){
 		
-		String sql = "select * from product where name like ? limit ?,?";
-		return super.queryByBame(sql, new Object[]{"%" + name + "%", (page - 1)*size, size});
+		String sql = "select id,name,price from product where name like ? limit ?,?";
+		return super.queryByBame(sql, new Object[] { "%" + name + "%",
+				(page - 1) * size, size },new RowMapper<Product>(){
+			
+			@Override
+			public Product mapRow(ResultSet rs) throws SQLException {
+				Product product = new Product();
+				product.setId(rs.getInt("id"));
+				product.setName(rs.getString("name"));
+				product.setPrice(rs.getDouble("price"));
+				return product;
+			}
+			
+		});
 	}	
 	
 	
 	
 	public Product getById(int id) {
-		
-		String sql = "select * from product where id = ?";
-		return super.getById(sql, id);
-		
+		String sql = "select id,name from product where id = ?";
+	
+		return super.getById(sql, id, new RowMapper<Product>() {
+			@Override
+			public Product mapRow(ResultSet rs) throws SQLException {
+				Product product = new Product();
+				product.setId(rs.getInt("id"));
+				product.setName(rs.getString("name"));
+				return product;
+			}
+		});
 	}
-
+	
 	
 	
 	public void save(Product product) {
@@ -70,6 +102,8 @@ public class ProductDaolmpl extends BaseDaoImpl<Product> {
 		super.update(sql, new Object[] { new Integer(i) });
 
 	}
+
+
 	
 	
 	/*

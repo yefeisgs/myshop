@@ -2,7 +2,7 @@ package cn.anyd.shop.dao;
 
 
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -60,7 +60,7 @@ public class ProductDaolmplTest {
 	
 	@Test
 	public void testQueryName() {
-		ArrayList<Product> proList = daoImpl.queryByBame("");
+		List<Product> proList = daoImpl.queryByBame("");
 		for(Product temp:proList){
 			System.out.println(temp);
 		}
@@ -68,7 +68,7 @@ public class ProductDaolmplTest {
 	
 	@Test
 	public void testQueryName1() {
-		ArrayList<Product> proList = daoImpl.queryByBame("", 2, 4);
+		List<Product> proList = daoImpl.queryByBame("", 2, 4);
 		for(Product temp:proList){
 			System.out.println(temp);
 		}
