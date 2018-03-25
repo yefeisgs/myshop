@@ -1,0 +1,69 @@
+package cn.anyd.shop.dao;
+
+
+
+import java.util.ArrayList;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import cn.ahyd.shop.model.Product;
+
+public class ProductDaolmplTest {
+	
+	private static ProductDaolmpl daoImpl = null;
+	
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		
+	daoImpl = new ProductDaolmpl();	
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		
+		daoImpl = null;
+		
+	}
+
+	@Test
+	public void testSave() {
+		Product product = new Product();
+		product.setName("000笔记本电脑");
+		product.setPrice(new Double(99.99));
+		product.setRemark("333游戏本!");
+		daoImpl.save(product);
+	}
+
+	@Test
+	public void testUpdate() {
+		Product product = new Product();
+		product.setName("111笔记本电脑");
+		product.setPrice(new Double(100.99));
+		product.setRemark("111游戏本!");
+		product.setId(new Integer(9));
+		daoImpl.update(product);	
+	}
+
+	@Test
+	public void testDelete() {
+		daoImpl.delete(5);
+	}
+
+	@Test
+	public void testGetByid() {
+		Product byid = daoImpl.getById(1);
+		System.out.println(byid);
+	}
+	
+	@Test
+	public void testQueryName() {
+		ArrayList<Product> proList = daoImpl.queryByBame("");
+		for(Product temp:proList){
+			System.out.println(temp);
+		}
+	}
+
+}
