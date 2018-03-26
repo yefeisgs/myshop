@@ -27,38 +27,15 @@ public class ProductDaolmpl extends BaseDaoImpl<Product> {
 	public List<Product> queryByBame(String name){
 		
 		String sql = "select * from product where name like ?";
-		return super.queryByBame(sql, new Object[]{"%" + name + "%"},new RowMapper<Product>() {
+		return super.queryByBame(sql, new Object[]{"%" + name + "%"}, Product.class);
+		}
 	
-			@Override
-			public Product mapRow(ResultSet rs) throws SQLException {
-				Product product = new Product();
-				product.setId(rs.getInt("id"));
-				product.setName(rs.getString("name"));
-				product.setPrice(rs.getDouble("price"));
-				product.setRemark(rs.getString("remark"));
-				return product;
-			}
-		});
-		
-		
-	}
 	
 	public List<Product> queryByBame(String name, int page, int size){
 		
 		String sql = "select id,name,price from product where name like ? limit ?,?";
 		return super.queryByBame(sql, new Object[] { "%" + name + "%",
-				(page - 1) * size, size },new RowMapper<Product>(){
-			
-			@Override
-			public Product mapRow(ResultSet rs) throws SQLException {
-				Product product = new Product();
-				product.setId(rs.getInt("id"));
-				product.setName(rs.getString("name"));
-				product.setPrice(rs.getDouble("price"));
-				return product;
-			}
-			
-		});
+				(page - 1) * size, size },Product.class);
 	}	
 	
 	

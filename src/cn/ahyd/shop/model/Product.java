@@ -1,12 +1,13 @@
 package cn.ahyd.shop.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product extends Object{
 	
-	private Integer id;  // int id
+	public Integer id;  // int id
 	private String name;
-	private Double price;
+	private BigDecimal price;
 	private String pic;
 	private String remark;
 	private Date date;
@@ -29,10 +30,10 @@ public class Product extends Object{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public String getPic() {

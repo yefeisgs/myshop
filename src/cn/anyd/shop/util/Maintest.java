@@ -3,8 +3,8 @@ package cn.anyd.shop.util;
 
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 
-import com.mysql.jdbc.Field;
 
 import cn.ahyd.shop.model.Product;
 
@@ -33,7 +33,7 @@ public class Maintest {
 		
 		name.setAccessible(true);
 		
-		name.get(t, "笔记本");
+		name.set(t, "笔记本");
 		
 		System.out.println(name.get(t));
 				

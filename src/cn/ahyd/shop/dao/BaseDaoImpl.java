@@ -1,9 +1,11 @@
 package cn.ahyd.shop.dao;
 
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,7 @@ public abstract class BaseDaoImpl<T> {
 
 	}
 
-	protected List<T> queryByBame(String sql, Object[] param, RowMapper<T> mapper) {
+	protected List<T> queryByBame(String sql, Object[] param, Class<T> clazz) {
 
 		List<T> tList = new ArrayList<T>();
 		
@@ -63,13 +65,25 @@ public abstract class BaseDaoImpl<T> {
 				pre.setObject(i+1, param[i]);
 			}
 			rs = pre.executeQuery();
+			
+			ResultSetMetaData metaData = rs.getMetaData();
+			
 			while (rs.next()) {
-				tList.add(mapper.mapRow(rs));
+				
+				T model = clazz.newInstance();
+				
+				for (int i=1;i<=metaData.getColumnCount();i++){
+					String colName = metaData.getColumnName(i);
+					Field field = clazz.getDeclaredField(colName);
+					field.setAccessible(true);
+					field.set(model,rs.getObject(colName));
+				}
+				tList.add(model);
 			}
 			return tList;
 			
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}finally {
 			JdbcUtil.close(conn, pre, rs);

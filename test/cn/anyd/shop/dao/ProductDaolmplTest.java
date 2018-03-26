@@ -2,6 +2,7 @@ package cn.anyd.shop.dao;
 
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -33,7 +34,7 @@ public class ProductDaolmplTest {
 	public void testSave() {
 		Product product = new Product();
 		product.setName("000笔记本电脑");
-		product.setPrice(new Double(99.99));
+		product.setPrice(new BigDecimal(99.99));
 		product.setRemark("333游戏本!");
 		daoImpl.save(product);
 	}
@@ -42,7 +43,7 @@ public class ProductDaolmplTest {
 	public void testUpdate() {
 		Product product = new Product();
 		product.setName("111笔记本电脑");
-		product.setPrice(new Double(100.99));
+		product.setPrice(new BigDecimal(100.99));
 		product.setRemark("111游戏本!");
 		product.setId(new Integer(9));
 		daoImpl.update(product);	
