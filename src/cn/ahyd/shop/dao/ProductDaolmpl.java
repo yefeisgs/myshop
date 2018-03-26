@@ -1,4 +1,4 @@
-package cn.anyd.shop.dao;
+package cn.ahyd.shop.dao;
 
 
 
@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cn.ahyd.shop.model.Product;
-import cn.yd.shop.dao.RowMapper;
 
 
 public class ProductDaolmpl extends BaseDaoImpl<Product> {

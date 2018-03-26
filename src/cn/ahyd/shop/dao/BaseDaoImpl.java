@@ -1,4 +1,4 @@
-package cn.anyd.shop.dao;
+package cn.ahyd.shop.dao;
 
 
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.anyd.shop.util.JdbcUtil;
-import cn.yd.shop.dao.RowMapper;
+import cn.ahyd.shop.dao.RowMapper;
 
 
 public abstract class BaseDaoImpl<T> {
@@ -51,7 +51,6 @@ public abstract class BaseDaoImpl<T> {
 
 		List<T> tList = new ArrayList<T>();
 		
-
 		Connection conn = null;
 		PreparedStatement pre = null;
 		ResultSet rs = null;
@@ -60,17 +59,12 @@ public abstract class BaseDaoImpl<T> {
 			conn = JdbcUtil.getConnection();
 			pre = conn.prepareStatement(sql);
 			
-			
 			for (int i = 0; i < param.length; i++){
-				
 				pre.setObject(i+1, param[i]);
-			
 			}
 			rs = pre.executeQuery();
-			
 			while (rs.next()) {
 				tList.add(mapper.mapRow(rs));
-				
 			}
 			return tList;
 			

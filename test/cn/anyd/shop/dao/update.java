@@ -1,7 +1,7 @@
 package cn.anyd.shop.dao;
 
+import cn.ahyd.shop.dao.ProductDaolmpl;
 import cn.ahyd.shop.model.Product;
-import cn.anyd.shop.dao.ProductDaolmpl;
 
 public class update {
 	public static void main(String[] args) {

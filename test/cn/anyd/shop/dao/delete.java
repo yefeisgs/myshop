@@ -1,6 +1,6 @@
 package cn.anyd.shop.dao;
 
-import cn.anyd.shop.dao.ProductDaolmpl;
+import cn.ahyd.shop.dao.ProductDaolmpl;
 
 public class delete {
 	

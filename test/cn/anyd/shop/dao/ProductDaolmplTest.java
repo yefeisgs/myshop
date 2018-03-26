@@ -8,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import cn.ahyd.shop.dao.ProductDaolmpl;
 import cn.ahyd.shop.model.Product;
 
 public class ProductDaolmplTest {

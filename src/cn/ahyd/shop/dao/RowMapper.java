@@ -1,4 +1,4 @@
-package cn.anyd.shop.dao;
+package cn.ahyd.shop.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
